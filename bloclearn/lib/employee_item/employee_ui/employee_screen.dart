@@ -3,6 +3,7 @@ import 'package:bloclearn/employee_item/bloc2/employee_events.dart';
 import 'package:bloclearn/employee_item/bloc2/employee_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class EmployeeItemScreen extends StatefulWidget {
   static const routeName = '/EmployeeItemScreen';
@@ -112,12 +113,212 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                             flex: 2,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  showDatePicker(
-                                     // builder: (context,child)=>Theme(data: ThemeData().co, child: child),
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => Dialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.65,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0,
+                                          vertical: 16.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xffEDF8FF)),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                          "Today",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff1DA1F2)),
+                                                        )),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xffEDF8FF)),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                          "Tuesday",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff1DA1F2)),
+                                                        )),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xffEDF8FF)),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                          "Next Tuesday",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff1DA1F2)),
+                                                        )),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xffEDF8FF)),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                          "After 1 Week",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff1DA1F2)),
+                                                        )),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            TableCalendar(
+                                                shouldFillViewport: false,
+                                                rowHeight: 30,
+                                                headerStyle: HeaderStyle(
+                                                  formatButtonVisible: false,
+                                                  titleCentered: true,
+                                                  headerPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 0),
+                                                ),
+                                                focusedDay: DateTime.now(),
+                                                firstDay: DateTime(2000),
+                                                lastDay: DateTime(2050)),
+                                            Spacer(),
+                                            Divider(
+                                              thickness: 1,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.date_range,
+                                                  color: Color(0xff1DA1F2),
+                                                ),
+                                                Text("data"),
+                                                Spacer(),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Color(
+                                                                      0xffEDF8FF)),
+                                                      onPressed: () {},
+                                                      child: Text(
+                                                        "Cancel",
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xff1DA1F2)),
+                                                      )),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Color(
+                                                                      0xffEDF8FF)),
+                                                      onPressed: () {},
+                                                      child: Text(
+                                                        "Save",
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xff1DA1F2)),
+                                                      )),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+
+                                  /* showDatePicker(
+                                      builder: (context, calender) => Theme(
+                                          data: ThemeData().copyWith(),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    ElevatedButton(
+                                                        onPressed: () {},
+                                                        child: Text("Today")),
+                                                    ElevatedButton(
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                            "Next Monday")),
+                                                  ],
+                                                ),
+                                                Container(child: calender),
+                                              ],
+                                            ),
+                                          )),
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(1950),
-                                      lastDate: DateTime(2050));
+                                      lastDate: DateTime(2050)); */
                                 },
                                 child: Row(
                                   children: const [

@@ -6,7 +6,6 @@ import 'package:bloclearn/employee_list/list_ui/employee_tile.dart';
 import 'package:bloclearn/model/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/employee_data.dart';
 
 class EmployeeListScreen extends StatefulWidget {
