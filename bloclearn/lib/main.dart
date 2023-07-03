@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import './employee_item/employee_ui/employee_screen.dart';
 import './employee_list/list_bloc/list_bloc.dart';
 import './employee_list/list_ui/home.dart';
-import './employee_item/employee_ui/employee_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,13 +30,14 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          '/':(ctx)=>const EmployeeListScreen(),
-          EmployeeItemScreen.routeName:(_)=>const EmployeeItemScreen()
+          '/': (ctx) => const EmployeeListScreen(),
+          EmployeeItemScreen.routeName: (_) => EmployeeItemScreen()
         },
       ),
     );
   }
 }
+
 /* 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});

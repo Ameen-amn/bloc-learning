@@ -24,6 +24,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
     employeeListBloc.add(EmployeeListInitialEvent());
     allList = EmployeeData.employeeData
         .map((e) => Employee(
+              id: e['id'],
               name: e['name'],
               position: e['position'],
               dateOfJoining: e['jdate'],
@@ -114,6 +115,9 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 },
                 child: const Icon(Icons.add),
               ),
+              bottomNavigationBar: Container(
+                child:  Text("Swipe left to delete"),
+              ),
               body: Column(
                 children: [
                   Visibility(
@@ -122,7 +126,19 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                     child: Expanded(
                       child: Column(
                         children: [
-                          Text("Current Employee"),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            color: const Color(0xffE5E5E5),
+                            child: const Text(
+                              "Current Employees",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  color: Color(0xff1DA1F2)),
+                            ),
+                          ),
                           Expanded(
                             child: ListView.builder(
                                 itemCount: _current.length,
@@ -130,9 +146,10 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                                   /* if (successState
                                           .employeList[i].dateofRetirement ==
                                       'No Date') { */
-                                  return EmployeeTile(employee: _current[i]);
+                                  return EmployeeTile(
+                                    employeeListBloc: employeeListBloc,
+                                    employee: _current[i]);
                                   // }
-                                  print("object $i");
                                 }),
                           ),
                         ],
@@ -146,7 +163,19 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                       height: 400,
                       child: Column(
                         children: [
-                          Text("Previous Employee"),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            color: const Color(0xffE5E5E5),
+                            child: const Text(
+                              "Previous Employees",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  color: Color(0xff1DA1F2)),
+                            ),
+                          ),
                           Expanded(
                             child: ListView.builder(
                                 itemCount: _previous.length,
@@ -154,7 +183,9 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                                   /* if (successState
                                           .employeList[i].dateofRetirement !=
                                       'No Date') { */
-                                  return EmployeeTile(employee: _previous[i]);
+                                  return EmployeeTile(
+                                    employeeListBloc: employeeListBloc,
+                                    employee: _previous[i]);
                                   // }
                                   print(i);
                                 }),

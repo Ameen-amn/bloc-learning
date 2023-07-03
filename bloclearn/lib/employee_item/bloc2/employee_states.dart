@@ -15,11 +15,12 @@ abstract class EmployeeState {
   } */
       );
 }
-
+abstract class EmployeeActioSatate extends EmployeeState{}
 class EmployeeLoading extends EmployeeState {
-  const EmployeeLoading();
+  
 }
-
+class EmployeeInitialState extends EmployeeState{}
+class EmployeeLoadedState extends EmployeeState{}
 class EmployeeError extends EmployeeState {
   final String message;
   const EmployeeError(this.message);

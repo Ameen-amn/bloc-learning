@@ -16,18 +16,20 @@ class EmployeeListBloc extends Bloc<EmployeeListEvent, EmployeeListState> {
     on<EmployeeListNavigateEditScreenEvent>(
       employeeListNavigateEditScreenEvent,
     );
+    on<EmployeeListItemDeleteEvent>(employeeListItemDeleteEvent);
   }
 
   FutureOr<void> employeeListInitialEvent(
       EmployeeListInitialEvent event, Emitter<EmployeeListState> emit) async {
     emit(EmployeeListLoadingState());
-    await Future.delayed(Duration(
+    await Future.delayed(const Duration(
       seconds: 2,
     ));
-    emit(EmployeeData.employeeData.length > 0
+    emit(EmployeeData.employeeData.isNotEmpty
         ? EmployeeListLoadedState(
             employeList: EmployeeData.employeeData
                 .map((e) => Employee(
+                      id: e['id'],
                       name: e['name'],
                       position: e['position'],
                       dateOfJoining: e['jdate'],
@@ -49,5 +51,14 @@ class EmployeeListBloc extends Bloc<EmployeeListEvent, EmployeeListState> {
     Emitter<EmployeeListState> emit,
   ) {
     emit(EmployeeListEditPageActionState());
+  }
+
+  FutureOr<void> employeeListItemDeleteEvent(
+    EmployeeListItemDeleteEvent event,
+    Emitter<EmployeeListState> emit,
+  ) {
+    //remove the product from  list;
+    //
+    emit(EmployeeListLoadedState(employeList: []));
   }
 }
