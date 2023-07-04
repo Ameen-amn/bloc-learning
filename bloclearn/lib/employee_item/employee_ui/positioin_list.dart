@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class EmployeePosition extends StatelessWidget {
   final EmployeeBloc employeeBloc;
   final String selectedRole;
-  EmployeePosition(
-      {super.key, required this.selectedRole, required this.employeeBloc});
+  EmployeePosition({super.key,required this.selectedRole, required this.employeeBloc});
 
+  
   @override
   Widget build(BuildContext context) {
     return ListTile(

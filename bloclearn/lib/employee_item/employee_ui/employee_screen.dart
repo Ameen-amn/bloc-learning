@@ -139,7 +139,7 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            side: BorderSide(
+                                            side:const BorderSide(
                                               color: Colors.black,
                                               width: 0.5,
                                             )),
@@ -147,11 +147,11 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                                     onPressed: () {
                                       employeeBloc.add(EmployeeJoinDateEvent());
                                     },
-                                    icon: Icon(
+                                    icon:const Icon(
                                       Icons.date_range,
                                       color: Color(0xff323238),
                                     ),
-                                    label: Text(
+                                    label:const Text(
                                       'To Day',
                                       style: TextStyle(
                                           fontSize: 14,

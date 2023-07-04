@@ -46,7 +46,6 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
 
   FutureOr<void> employeePositioinSelectedEvent(
       EmployeePositioinSelectedEvent event, Emitter<EmployeeState> emit) {
-         emit(EmployeePositionState());
     emit(EmployeePositioinSelectedState(pos: event.p));
   }
 }
