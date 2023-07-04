@@ -8,6 +8,7 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   EmployeeBloc() : super(EmployeeInitialState()) {
     on<EmployeeInitialEvent>(employeeInitialEvent);
     on<EmployeePositionEvent>(employeePositionEvent);
+    on<EmployeePositioinSelectedEvent>(employeePositioinSelectedEvent);
     on<EmployeeJoinDateEvent>(employeeJoinDateEvent);
     on<EmployeeRetirementDateEvent>(employeeRetirementDateEvent);
     on<EmployeeSaveEvent>(employeeSaveEvent);
@@ -41,5 +42,11 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   FutureOr<void> employeeCancelEvent(
       EmployeeCancelEvent event, Emitter<EmployeeState> emit) {
     emit(EmployeeCancelState());
+  }
+
+  FutureOr<void> employeePositioinSelectedEvent(
+      EmployeePositioinSelectedEvent event, Emitter<EmployeeState> emit) {
+         emit(EmployeePositionState());
+    emit(EmployeePositioinSelectedState(pos: event.p));
   }
 }

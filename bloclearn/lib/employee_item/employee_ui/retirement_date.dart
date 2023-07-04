@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class EmployeeJoiningDate extends StatelessWidget {
-  const EmployeeJoiningDate({super.key});
+class EmployeeRetirementDate extends StatelessWidget {
+  const EmployeeRetirementDate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,6 @@ class EmployeeJoiningDate extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  
                   children: [
                     Expanded(
                       flex: 1,
@@ -29,11 +28,12 @@ class EmployeeJoiningDate extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                              
                                 elevation: 0,
                                 backgroundColor: Color(0xffEDF8FF)),
                             onPressed: () {},
                             child: Text(
-                              "Today",
+                              "No Date",
                               style: TextStyle(color: Color(0xff1DA1F2)),
                             )),
                       ),
@@ -48,41 +48,7 @@ class EmployeeJoiningDate extends StatelessWidget {
                                 backgroundColor: Color(0xffEDF8FF)),
                             onPressed: () {},
                             child: Text(
-                              "Tuesday",
-                              style: TextStyle(color: Color(0xff1DA1F2)),
-                            )),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: Color(0xffEDF8FF)),
-                            onPressed: () {},
-                            child: Text(
-                              "Next Tuesday",
-                              style: TextStyle(color: Color(0xff1DA1F2)),
-                            )),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: Color(0xffEDF8FF)),
-                            onPressed: () {},
-                            child: Text(
-                              "After 1 Week",
+                              "To Day",
                               style: TextStyle(color: Color(0xff1DA1F2)),
                             )),
                       ),

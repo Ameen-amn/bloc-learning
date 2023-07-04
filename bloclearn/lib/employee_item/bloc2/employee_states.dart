@@ -15,15 +15,21 @@ abstract class EmployeeState {
   } */
       );
 }
-abstract class EmployeeActioState extends EmployeeState{}
-class EmployeeLoading extends EmployeeState {
-  
-}
-class EmployeeInitialState extends EmployeeState{}
-class EmployeeLoadedState extends EmployeeState{}
-class EmployeePositionState extends EmployeeActioState{}
-class EmployeeJoinDateState extends EmployeeActioState{}
-class EmployeeRetirementState extends EmployeeActioState{}
+
+abstract class EmployeeActioState extends EmployeeState {}
+
+class EmployeeLoading extends EmployeeState {}
+
+class EmployeeInitialState extends EmployeeState {}
+
+class EmployeeLoadedState extends EmployeeState {}
+
+class EmployeePositionState extends EmployeeActioState {}
+
+class EmployeeJoinDateState extends EmployeeActioState {}
+
+class EmployeeRetirementState extends EmployeeActioState {}
+
 class EmployeeErrorState extends EmployeeState {
   final String message;
   const EmployeeErrorState(this.message);
@@ -32,4 +38,11 @@ class EmployeeErrorState extends EmployeeState {
 class EmployeeAddedState extends EmployeeState {
   const EmployeeAddedState();
 }
-class EmployeeCancelState extends EmployeeState{}
+
+class EmployeeCancelState extends EmployeeState {}
+
+class EmployeePositioinSelectedState extends EmployeeState {
+  final String pos;
+
+  EmployeePositioinSelectedState({required this.pos});
+}
