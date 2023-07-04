@@ -6,6 +6,7 @@ import 'package:bloclearn/employee_list/list_ui/employee_tile.dart';
 import 'package:bloclearn/model/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../data/employee_data.dart';
 
 class EmployeeListScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             ))
         .toList();
     listCreating();
-    
+
     super.initState();
   }
 
@@ -46,8 +47,6 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
       }
     });
   }
-
-  
 
   final EmployeeListBloc employeeListBloc = EmployeeListBloc();
   @override
@@ -77,13 +76,20 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 title: const Text("EmployeeList"),
               ),
               floatingActionButton: FloatingActionButton(
+                elevation: 0,
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0)),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   employeeListBloc.add(EmployeeListNavigatetoAddScreenEvent());
                   /*  context
                   .read<EmployeeListBloc>()
                   .add(EmployeeListNavigatetoAddScreenEvent());  */ //Change here
                 },
-                child: const Icon(Icons.add),
               ),
               body: Center(
                 child: Column(
@@ -102,92 +108,111 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 title: const Text("EmployeeList"),
               ),
               floatingActionButton: FloatingActionButton(
+                elevation: 0,
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   employeeListBloc.add(EmployeeListNavigatetoAddScreenEvent());
                   /*  context
                   .read<EmployeeListBloc>()
                   .add(EmployeeListNavigatetoAddScreenEvent());  */ //Change here
                 },
-                child: const Icon(Icons.add),
               ),
-              bottomNavigationBar: Container(
-                child:  Text("Swipe left to delete"),
-              ),
-              body: Column(
+              body: Stack(
                 children: [
-                  Visibility(
-                    visible: successState.employeList.any(
-                        (element) => element.dateofRetirement == "No Date"),
-                    child: Expanded(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            color: const Color(0xffE5E5E5),
-                            child: const Text(
-                              "Current Employees",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff1DA1F2)),
-                            ),
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                                itemCount: _current.length,
-                                itemBuilder: (context, i) {
-                                  /* if (successState
-                                          .employeList[i].dateofRetirement ==
-                                      'No Date') { */
-                                  return EmployeeTile(
-                                    employeeListBloc: employeeListBloc,
-                                    employee: _current[i]);
-                                  // }
-                                }),
-                          ),
-                        ],
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * .07,
+                      color: Color(0xffE5E5E5),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        child: Text(
+                          "Swipe left to delete",
+                        ),
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: successState.employeList.any(
-                        (element) => element.dateofRetirement != "No Date"),
-                    child: SizedBox(
-                      height: 400,
-                      child: Column(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            color: const Color(0xffE5E5E5),
-                            child: const Text(
-                              "Previous Employees",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff1DA1F2)),
-                            ),
+                  Column(
+                    children: [
+                      Visibility(
+                        visible: successState.employeList.any(
+                            (element) => element.dateofRetirement == "No Date"),
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                color: const Color(0xffE5E5E5),
+                                child: const Text(
+                                  "Current Employees",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.normal,
+                                      color: Color(0xff1DA1F2)),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: _current.length,
+                                    itemBuilder: (context, i) {
+                                      /* if (successState
+                                            .employeList[i].dateofRetirement ==
+                                        'No Date') { */
+                                      return EmployeeTile(
+                                          employeeListBloc: employeeListBloc,
+                                          employee: _current[i]);
+                                      // }
+                                    }),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: ListView.builder(
-                                itemCount: _previous.length,
-                                itemBuilder: (context, i) {
-                                  /* if (successState
-                                          .employeList[i].dateofRetirement !=
-                                      'No Date') { */
-                                  return EmployeeTile(
-                                    employeeListBloc: employeeListBloc,
-                                    employee: _previous[i]);
-                                  // }
-                                  print(i);
-                                }),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Visibility(
+                        visible: successState.employeList.any(
+                            (element) => element.dateofRetirement != "No Date"),
+                        child: SizedBox(
+                          height: 400,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                color: const Color(0xffE5E5E5),
+                                child: const Text(
+                                  "Previous Employees",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.normal,
+                                      color: Color(0xff1DA1F2)),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: _previous.length,
+                                    itemBuilder: (context, i) {
+                                      return EmployeeTile(
+                                          employeeListBloc: employeeListBloc,
+                                          employee: _previous[i]);
+                                      // }
+                                    }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

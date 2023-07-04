@@ -54,6 +54,7 @@ class PositionList extends StatelessWidget {
                 .map((position) => Column(
                       children: [
                         ListTile(
+                          iconColor: Colors.blue,
                           onTap: () {
                             employeeBloc.add(
                                 EmployeePositioinSelectedEvent(p: position));
