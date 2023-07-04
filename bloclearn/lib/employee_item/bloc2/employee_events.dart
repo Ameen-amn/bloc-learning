@@ -12,7 +12,11 @@ class EmployeePositionEvent extends EmployeeEvent {
   EmployeePositionEvent(this.position);
 }
 
-class EmployeeJoinDateEvent extends EmployeeEvent {}
+class EmployeeJoinDateEvent extends EmployeeEvent {
+  final DateTime selectedDate;
+
+  EmployeeJoinDateEvent({required this.selectedDate});
+}
 
 class EmployeeRetirementDateEvent extends EmployeeEvent {}
 

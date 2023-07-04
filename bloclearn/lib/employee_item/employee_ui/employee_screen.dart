@@ -31,6 +31,8 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
     super.initState();
   }
 
+  DateTime jDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +89,10 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const EmployeeJoiningDate();
+                  return EmployeeJoiningDate(
+                    employeeBloc: employeeBloc,
+                    selectedJDate: jDate,
+                  );
                 });
           } else if (state is EmployeeRetirementState) {
             showDialog(
@@ -139,19 +144,20 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            side:const BorderSide(
+                                            side: const BorderSide(
                                               color: Colors.black,
                                               width: 0.5,
                                             )),
                                         backgroundColor: Colors.white),
                                     onPressed: () {
-                                      employeeBloc.add(EmployeeJoinDateEvent());
+                                      employeeBloc.add(EmployeeJoinDateEvent(
+                                          selectedDate: jDate));
                                     },
-                                    icon:const Icon(
+                                    icon: const Icon(
                                       Icons.date_range,
                                       color: Color(0xff323238),
                                     ),
-                                    label:const Text(
+                                    label: const Text(
                                       'To Day',
                                       style: TextStyle(
                                           fontSize: 14,
@@ -188,7 +194,7 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                                       employeeBloc
                                           .add(EmployeeRetirementDateEvent());
                                     },
-                                    label:const Text(
+                                    label: const Text(
                                       'No Date',
                                       style: TextStyle(
                                           fontSize: 14,
@@ -256,7 +262,120 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
                                             )),
                                         backgroundColor: Colors.white),
                                     onPressed: () {
-                                      employeeBloc.add(EmployeeJoinDateEvent());
+                                      employeeBloc.add(EmployeeJoinDateEvent(
+                                          selectedDate: jDate));
+                                    },
+                                    icon: Icon(
+                                      Icons.date_range,
+                                      color: Color(0xff323238),
+                                    ),
+                                    label: Text(
+                                      'To Day',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff323238)),
+                                    )),
+                              ),
+                              const Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: ElevatedButton.icon(
+                                    icon: const Icon(
+                                      Icons.date_range,
+                                      color: Color(0xff323238),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            side: const BorderSide(
+                                              color: Colors.black,
+                                              width: 0.5,
+                                            )),
+                                        backgroundColor: Colors.white),
+                                    onPressed: () {
+                                      employeeBloc
+                                          .add(EmployeeRetirementDateEvent());
+                                    },
+                                    label: Text(
+                                      'No Date',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff323238)),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            case EmployeeJoinDateState:
+              final selectedRole = state as EmployeeJoinDateState;
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 24,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: name,
+                            decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.all(0),
+                                prefixIcon: Icon(Icons.person_2_outlined,
+                                    color: Colors.blue),
+                                hintText: "Employee Name",
+                                border: OutlineInputBorder()),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 23),
+                            child: EmployeePosition(
+                              selectedRole: '',
+                              employeeBloc: employeeBloc,
+                            ),
+                            /* style: const TextButton.s(
+                                  contentPadding: EdgeInsets.all(0),
+                                  prefixIcon: Icon(Icons.cases_outlined,
+                                      color: Colors.blue),
+                                  hintText: "Position",
+                                  border: OutlineInputBorder()), */
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            side: BorderSide(
+                                              color: Colors.black,
+                                              width: 0.5,
+                                            )),
+                                        backgroundColor: Colors.white),
+                                    onPressed: () {
+                                      employeeBloc.add(EmployeeJoinDateEvent(
+                                          selectedDate: jDate));
                                     },
                                     icon: Icon(
                                       Icons.date_range,

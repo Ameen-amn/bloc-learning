@@ -28,7 +28,7 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
 
   FutureOr<void> employeeJoinDateEvent(
       EmployeeJoinDateEvent event, Emitter<EmployeeState> emit) {
-    emit(EmployeeJoinDateState());
+    emit(EmployeeJoinDateState(selectedJDate: event.selectedDate));
   }
 
   FutureOr<void> employeeRetirementDateEvent(

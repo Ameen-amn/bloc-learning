@@ -26,7 +26,11 @@ class EmployeeLoadedState extends EmployeeState {}
 
 class EmployeePositionState extends EmployeeActioState {}
 
-class EmployeeJoinDateState extends EmployeeActioState {}
+class EmployeeJoinDateState extends EmployeeActioState {
+  final DateTime selectedJDate;
+
+  EmployeeJoinDateState({required this.selectedJDate});
+}
 
 class EmployeeRetirementState extends EmployeeActioState {}
 

@@ -1,8 +1,24 @@
+import 'package:bloclearn/employee_item/bloc2/employee_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class EmployeeJoiningDate extends StatelessWidget {
-  const EmployeeJoiningDate({super.key});
+class EmployeeJoiningDate extends StatefulWidget {
+  final DateTime selectedJDate;
+  final EmployeeBloc employeeBloc;
+  const EmployeeJoiningDate(
+      {required this.employeeBloc, required this.selectedJDate, super.key});
+
+  @override
+  State<EmployeeJoiningDate> createState() => _EmployeeJoiningDateState();
+}
+
+class _EmployeeJoiningDateState extends State<EmployeeJoiningDate> {
+  DateTime jdate = DateTime.now();
+  void _onDaySelected(DateTime currentDay, DateTime focuesDay) {
+    setState(() {
+      jdate = focuesDay;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +37,6 @@ class EmployeeJoiningDate extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  
                   children: [
                     Expanded(
                       flex: 1,
@@ -92,12 +107,15 @@ class EmployeeJoiningDate extends StatelessWidget {
                 TableCalendar(
                     shouldFillViewport: false,
                     rowHeight: 30,
-                    headerStyle: HeaderStyle(
+                    headerStyle: const HeaderStyle(
                       formatButtonVisible: false,
                       titleCentered: true,
                       headerPadding: EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    focusedDay: DateTime.now(),
+                    focusedDay: widget.selectedJDate,
+                    selectedDayPredicate: (day) =>
+                        isSameDay(day, widget.selectedJDate),
+                    onDaySelected: _onDaySelected,
                     firstDay: DateTime(2000),
                     lastDay: DateTime(2050)),
               ],
