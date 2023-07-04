@@ -31,7 +31,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             ))
         .toList();
     listCreating();
-    checkLIst();
+    
     super.initState();
   }
 
@@ -47,11 +47,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
     });
   }
 
-  void checkLIst() {
-    _previous.forEach((element) {
-      print(element);
-    });
-  }
+  
 
   final EmployeeListBloc employeeListBloc = EmployeeListBloc();
   @override

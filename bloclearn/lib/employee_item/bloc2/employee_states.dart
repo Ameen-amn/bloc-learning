@@ -15,17 +15,21 @@ abstract class EmployeeState {
   } */
       );
 }
-abstract class EmployeeActioSatate extends EmployeeState{}
+abstract class EmployeeActioState extends EmployeeState{}
 class EmployeeLoading extends EmployeeState {
   
 }
 class EmployeeInitialState extends EmployeeState{}
 class EmployeeLoadedState extends EmployeeState{}
-class EmployeeError extends EmployeeState {
+class EmployeePositionState extends EmployeeActioState{}
+class EmployeeJoinDateState extends EmployeeActioState{}
+class EmployeeRetirementState extends EmployeeActioState{}
+class EmployeeErrorState extends EmployeeState {
   final String message;
-  const EmployeeError(this.message);
+  const EmployeeErrorState(this.message);
 }
 
-class EmployeeAdded extends EmployeeState {
-  const EmployeeAdded();
+class EmployeeAddedState extends EmployeeState {
+  const EmployeeAddedState();
 }
+class EmployeeCancelState extends EmployeeState{}

@@ -3,7 +3,8 @@ import 'package:bloclearn/employee_item/bloc2/employee_events.dart';
 import 'package:bloclearn/employee_item/bloc2/employee_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+import './joining_date.dart';
 
 class EmployeeItemScreen extends StatefulWidget {
   static const routeName = '/EmployeeItemScreen';
@@ -68,292 +69,100 @@ class _EmployeeItemScreenState extends State<EmployeeItemScreen> {
         ),
       ),
       body: BlocConsumer<EmployeeBloc, EmployeeState>(
-        bloc: EmployeeBloc(),
+        bloc: employeeBloc,
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is EmployeeJoinDateState) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  print("join");
+                  return EmployeeJoiningDate();
+                });
+          }
         },
-        listenWhen: (previous, current) => current is EmployeeActioSatate,
-        buildWhen: (previous, current) => current is! EmployeeActioSatate,
+        listenWhen: (previous, current) => current is EmployeeActioState,
+        buildWhen: (previous, current) => current is! EmployeeActioState,
         builder: (context, state) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 24,
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: name,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(0),
-                            prefixIcon: Icon(Icons.person_2_outlined,
-                                color: Colors.blue),
-                            hintText: "Employee Name",
-                            border: OutlineInputBorder()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 23),
-                        child: TextFormField(
-                          controller: position,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(0),
-                              prefixIcon: Icon(Icons.cases_outlined,
-                                  color: Colors.blue),
-                              hintText: "Position",
-                              border: OutlineInputBorder()),
-                        ),
-                      ),
-                      Row(
+          switch (state.runtimeType) {
+            case EmployeeInitialState:
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 24,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
                         children: [
-                          Expanded(
-                            flex: 2,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => Dialog(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16)),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.65,
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0,
-                                          vertical: 16.0,
-                                        ),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                                backgroundColor:
-                                                                    Color(
-                                                                        0xffEDF8FF)),
-                                                        onPressed: () {},
-                                                        child: Text(
-                                                          "Today",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xff1DA1F2)),
-                                                        )),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                                backgroundColor:
-                                                                    Color(
-                                                                        0xffEDF8FF)),
-                                                        onPressed: () {},
-                                                        child: Text(
-                                                          "Tuesday",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xff1DA1F2)),
-                                                        )),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                                backgroundColor:
-                                                                    Color(
-                                                                        0xffEDF8FF)),
-                                                        onPressed: () {},
-                                                        child: Text(
-                                                          "Next Tuesday",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xff1DA1F2)),
-                                                        )),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                                backgroundColor:
-                                                                    Color(
-                                                                        0xffEDF8FF)),
-                                                        onPressed: () {},
-                                                        child: Text(
-                                                          "After 1 Week",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xff1DA1F2)),
-                                                        )),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            TableCalendar(
-                                                shouldFillViewport: false,
-                                                rowHeight: 30,
-                                                headerStyle: HeaderStyle(
-                                                  formatButtonVisible: false,
-                                                  titleCentered: true,
-                                                  headerPadding:
-                                                      EdgeInsets.symmetric(
-                                                          horizontal: 0),
-                                                ),
-                                                focusedDay: DateTime.now(),
-                                                firstDay: DateTime(2000),
-                                                lastDay: DateTime(2050)),
-                                            Spacer(),
-                                            Divider(
-                                              thickness: 1,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.date_range,
-                                                  color: Color(0xff1DA1F2),
-                                                ),
-                                                Text("data"),
-                                                Spacer(),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Color(
-                                                                      0xffEDF8FF)),
-                                                      onPressed: () {},
-                                                      child: Text(
-                                                        "Cancel",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xff1DA1F2)),
-                                                      )),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Color(
-                                                                      0xffEDF8FF)),
-                                                      onPressed: () {},
-                                                      child: Text(
-                                                        "Save",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xff1DA1F2)),
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-
-                                  /* showDatePicker(
-                                      builder: (context, calender) => Theme(
-                                          data: ThemeData().copyWith(),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(16)),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    ElevatedButton(
-                                                        onPressed: () {},
-                                                        child: Text("Today")),
-                                                    ElevatedButton(
-                                                        onPressed: () {},
-                                                        child: Text(
-                                                            "Next Monday")),
-                                                  ],
-                                                ),
-                                                Container(child: calender),
-                                              ],
-                                            ),
-                                          )),
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1950),
-                                      lastDate: DateTime(2050)); */
-                                },
-                                child: Row(
-                                  children: const [
-                                    Icon(Icons.date_range),
-                                    Text('To Day'),
-                                  ],
-                                )),
+                          TextFormField(
+                            controller: name,
+                            decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.all(0),
+                                prefixIcon: Icon(Icons.person_2_outlined,
+                                    color: Colors.blue),
+                                hintText: "Employee Name",
+                                border: OutlineInputBorder()),
                           ),
-                          const Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 23),
                             child: TextFormField(
                               controller: position,
                               decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.all(0),
-                                  prefixIcon: Icon(Icons.date_range,
+                                  prefixIcon: Icon(Icons.cases_outlined,
                                       color: Colors.blue),
-                                  hintText: "No date",
+                                  hintText: "Position",
                                   border: OutlineInputBorder()),
                             ),
                           ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      employeeBloc.add(EmployeeJoinDateEvent());
+                                    },
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.date_range),
+                                        Text('To Day'),
+                                      ],
+                                    )),
+                              ),
+                              const Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: TextFormField(
+                                  controller: position,
+                                  decoration: const InputDecoration(
+                                      contentPadding: EdgeInsets.all(0),
+                                      prefixIcon: Icon(Icons.date_range,
+                                          color: Colors.blue),
+                                      hintText: "No date",
+                                      border: OutlineInputBorder()),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ],
-          );
+                ],
+              );
+
+            default:
+              return SizedBox();
+          }
         },
       ),
     );
